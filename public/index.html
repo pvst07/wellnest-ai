@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellnest AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🌿</div>
+        <div>
+          <h2>Wellnest</h2>
+          <p>AI health guide</p>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-btn active" data-page="dashboard">
+          <span>⌘</span>
+          Dashboard
+        </button>
+        <button class="nav-btn" data-page="chat">
+          <span>✦</span>
+          AI Chat
+        </button>
+        <button class="nav-btn" data-page="routine">
+          <span>◌</span>
+          Routine
+        </button>
+      </nav>
+
+      <div class="mini-profile">
+        <div class="pulse-dot"></div>
+        <div>
+          <strong>Connected</strong>
+          <p>Smart watch mock data</p>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section id="dashboard" class="page active">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Today overview</p>
+            <h1>Your wellness dashboard</h1>
+            <p class="subtext">A clean summary of daily activity, recovery, and body signals.</p>
+          </div>
+          <button class="soft-btn" id="refreshBtn">Refresh data</button>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div>
+              <p class="eyebrow">Wellness score</p>
+              <h2 id="scoreText">86</h2>
+              <p id="scoreMessage">Balanced day. Good activity and recovery.</p>
+            </div>
+            <div class="score-ring">
+              <span id="scoreRingText">86</span>
+            </div>
+          </div>
+
+          <div class="insight-card">
+            <p class="eyebrow">AI insight</p>
+            <h3 id="mainInsight">Light cardio is a good choice today.</h3>
+            <p id="mainInsightText">
+              Your steps and sleep look stable. Keep the workout moderate and focus on hydration.
+            </p>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-icon">♡</div>
+            <p>Heart rate</p>
+            <h3><span id="heartRate">78</span> bpm</h3>
+            <small id="heartStatus">Resting range looks okay</small>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-icon">↟</div>
+            <p>Steps</p>
+            <h3><span id="steps">8,420</span></h3>
+            <small id="stepsStatus">Goal almost reached</small>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-icon">☾</div>
+            <p>Sleep</p>
+            <h3><span id="sleep">7h 20m</span></h3>
+            <small id="sleepStatus">Good recovery</small>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-icon">≋</div>
+            <p>Calories</p>
+            <h3><span id="calories">520</span> kcal</h3>
+            <small id="caloriesStatus">Active energy</small>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Weekly activity</h3>
+              <span>steps</span>
+            </div>
+            <div class="bar-chart" id="barChart"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Recommended focus</h3>
+              <span>today</span>
+            </div>
+            <ul class="focus-list">
+              <li><span></span> 25 minutes light cardio</li>
+              <li><span></span> 2 liters water target</li>
+              <li><span></span> Stretch shoulders and hips</li>
+              <li><span></span> Sleep before midnight if possible</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="chat" class="page">
+        <div class="chat-layout">
+          <div class="chat-main">
+            <div class="chat-header">
+              <div>
+                <p class="eyebrow">Hermes 3 via OpenRouter</p>
+                <h1>Ask your health AI</h1>
+                <p class="subtext">Ask about exercise routines, recovery, sleep, calories, or smartwatch readings.</p>
+              </div>
+              <button class="soft-btn" id="clearChat">Clear chat</button>
+            </div>
+
+            <div class="quick-prompts">
+              <button data-prompt="วันนี้ควรออกกำลังกายแบบไหนดีจากค่าสุขภาพของฉัน?">Workout today</button>
+              <button data-prompt="ช่วยจัด routine ออกกำลังกาย 20 นาทีสำหรับมือใหม่">20 min routine</button>
+              <button data-prompt="ถ้านอนน้อยควรออกกำลังกายหนักไหม?">Low sleep advice</button>
+              <button data-prompt="ช่วยอธิบายค่า heart rate, steps, sleep จาก smart watch แบบง่ายๆ">Explain data</button>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+              <div class="message bot">
+                <div class="avatar">🌿</div>
+                <div class="bubble">
+                  สวัสดี ฉันคือ Wellnest AI ถามเรื่องออกกำลังกาย สุขภาพเบื้องต้น การนอน หรือค่าสมาร์ทวอชได้เลย
+                </div>
+              </div>
+            </div>
+
+            <form class="composer" id="chatForm">
+              <input id="userInput" type="text" placeholder="Ask Wellnest AI..." autocomplete="off" />
+              <button type="submit">Send</button>
+            </form>
+          </div>
+
+          <aside class="chat-side">
+            <div class="side-card">
+              <h3>Current watch data</h3>
+              <div class="side-row"><span>Heart rate</span><strong id="sideHeart">78 bpm</strong></div>
+              <div class="side-row"><span>Steps</span><strong id="sideSteps">8,420</strong></div>
+              <div class="side-row"><span>Sleep</span><strong id="sideSleep">7h 20m</strong></div>
+              <div class="side-row"><span>Calories</span><strong id="sideCalories">520 kcal</strong></div>
+            </div>
+
+            <div class="side-card warning">
+              <h3>Safety note</h3>
+              <p>This chatbot is not a doctor. For chest pain, severe breathing trouble, fainting, or serious symptoms, seek medical help immediately.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="routine" class="page">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Personal routine</p>
+            <h1>Simple healthy plan</h1>
+            <p class="subtext">A minimal daily routine based on general wellness habits.</p>
+          </div>
+        </div>
+
+        <div class="routine-grid">
+          <div class="routine-card">
+            <span>01</span>
+            <h3>Morning reset</h3>
+            <p>Drink water, walk 5–10 minutes, and do light mobility for neck, shoulders, and hips.</p>
+          </div>
+          <div class="routine-card">
+            <span>02</span>
+            <h3>Workout block</h3>
+            <p>Choose light cardio, strength training, or stretching depending on sleep and energy level.</p>
+          </div>
+          <div class="routine-card">
+            <span>03</span>
+            <h3>Recovery</h3>
+            <p>Eat enough protein, avoid overtraining, and keep your sleep consistent.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
