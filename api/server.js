@@ -109,8 +109,10 @@ ${JSON.stringify(watchData || {}, null, 2)}
   }
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+if (!(process.env.VERCEL || process.env.NODE_ENV === "production")) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
-export default app;   
+export default app;
