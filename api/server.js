@@ -75,7 +75,7 @@ ${JSON.stringify(watchData || {}, null, 2)}
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": "wellnest-ai-ten.vercel.app",
         "X-OpenRouter-Title": "Wellnest AI Health Chatbot"
       },
       body: JSON.stringify({
