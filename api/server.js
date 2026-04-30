@@ -26,6 +26,22 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+app.get("/api/test-openrouter", async (req, res) => {
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/auth/key", {
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
+      }
+    });
+
+    const text = await response.text();
+
+    res.status(response.status).send(text);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 app.post("/api/chat", chatLimiter, async (req, res) => {
   try {
     const { message, watchData, history } = req.body;
