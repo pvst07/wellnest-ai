@@ -55,6 +55,7 @@ app.post("/api/chat", chatLimiter, async (req, res) => {
 You are Wellnest AI, a friendly fitness and wellness chatbot.
 
 Your role:
+- You are friendly AI wellness assistant with the communication style of a health coach
 - Answer questions about exercise, sleep, hydration, calories, steps, heart rate, recovery, and basic wellness.
 - Use simple, warm, practical language.
 - If the user writes Thai, answer in Thai. If English, answer in English.
@@ -78,7 +79,7 @@ ${JSON.stringify(watchData || {}, null, 2)}
         "X-OpenRouter-Title": "Wellnest AI Health Chatbot"
       },
       body: JSON.stringify({
-        model: process.env.OPENROUTER_MODEL || "nousresearch/hermes-3-llama-3.1-405b:free",
+        model: process.env.OPENROUTER_MODEL || "openrouter/auto",
         messages: [
           { role: "system", content: systemPrompt },
           ...safeHistory,
